@@ -1,0 +1,160 @@
+/* Animated Pink–Red Background */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff2a6d, #ff5277, #ff7a85, #ff1e4d);
+    background-size: 400% 400%;
+    animation: bgAnimation 12s ease infinite;
+    overflow: hidden;
+    height: 100vh;
+}
+
+@keyframes bgAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* CARD */
+.card {
+    width: 320px;
+    height: 420px;
+    margin: auto;
+    perspective: 1000px;
+    position: relative;
+}
+
+.front, .inside {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    transition: transform 1s ease-in-out;
+}
+
+.front {
+    background: linear-gradient(135deg, #ff8aa8, #ff4d6d);
+}
+
+.inside {
+    background: #fff;
+    transform: rotateY(180deg);
+    color: #333;
+}
+
+#card.open .front {
+    transform: rotateY(-180deg);
+}
+
+#card.open .inside {
+    transform: rotateY(0deg);
+}
+
+.front h1 {
+    margin-top: 160px;
+    color: white;
+    font-size: 28px;
+}
+
+/* BUTTON */
+#openBtn {
+    margin-top: 20px;
+    padding: 12px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    background: #ff0040;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#openBtn:hover {
+    background: #d60036;
+}
+
+/* CONFETTI */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 14px;
+    top: -20px;
+    animation: confettiFall 3s linear forwards;
+    opacity: 0.9;
+    z-index: 1001;
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* BALLOONS */
+.balloons {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1002;
+}
+
+.balloon {
+    position: absolute;
+    bottom: 0;
+    width: 40px;
+    height: 55px;
+    border-radius: 50% 50% 45% 45%;
+    box-shadow: inset -5px -8px rgba(0,0,0,0.25);
+    animation: fly 6s ease-in forwards;
+    transform-origin: bottom center;
+}
+
+.balloon::before {
+    content: "";
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 10px;
+    background: inherit;
+    border-radius: 20%;
+}
+
+.balloon::after {
+    content: "";
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    width: 2px;
+    height: 35px;
+    background: #333;
+    transform: translateX(-50%);
+    opacity: 0.8;
+}
+
+/* Smooth fade disappearance */
+@keyframes fly {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-160vh) rotate(6deg);
+        opacity: 0;
+    }
+}
